@@ -1,0 +1,67 @@
+export const SUBJECTS_DATA = [
+  ['SDI-14105', 'Introducción a la Ingeniería', 1, 'fall', []],
+  ['COM-11101', 'Algoritmos y Programas', 1, 'both', []],
+  ['MAT-14001', 'Intro. a la Matemática Superior', 1, 'both', []],
+  ['MAT-14200', 'Geometría Analítica', 1, 'both', []],
+  ['EGN-17121', 'Ideas e Inst. Pol. y Soc. I', 1, 'both', []],
+  ['LEN-12701', 'Estrategias de Com. Escrita', 1, 'both', []],
+  ['IIO-15130', 'Fundamentos de Química', 2, 'both', []],
+  ['COM-11102', 'Estructuras de Datos', 2, 'both', ['COM-11101']],
+  ['MAT-14100', 'Cálculo Diferencial e Integral I', 2, 'both', ['MAT-14001']],
+  ['MAT-14201', 'Álgebra Lineal I', 2, 'both', ['MAT-14200']],
+  ['EGN-17122', 'Ideas e Inst. Pol. y Soc. II', 2, 'both', ['EGN-17121']],
+  ['EGN-17141', 'Probs. de la Civ. Contemporánea I', 2, 'both', []],
+  ['SDI-11120', 'Elementos de Física', 3, 'both', ['MAT-14100']],
+  ['COM-16203', 'Desarrollo de Aplicaciones Informáticas', 3, 'both', ['COM-11102']],
+  ['COM-11103', 'Estructuras de Datos Avanzadas', 3, 'both', ['COM-11102']],
+  ['MAT-14101', 'Cálculo Diferencial e Integral II', 3, 'both', ['MAT-14100']],
+  ['CON-10100', 'Contabilidad I', 3, 'both', []],
+  ['EGN-17123', 'Ideas e Inst. Pol. y Soc. III (A)', 3, 'both', ['EGN-17122', 'EGN-17141']],
+  ['EGN-17142', 'Probs. de la Civ. Contemporánea II', 3, 'both', ['EGN-17141']],
+  ['LEN-12702', 'Seminario de Com. Escrita (A)', 3, 'both', ['LEN-12701']],
+  ['SDI-11221', 'Elementos de Electrónica', 4, 'spring', ['SDI-11120']],
+  ['COM-12101', 'Bases de Datos', 4, 'both', ['SDI-14105', 'COM-16203', 'COM-11103']],
+  ['MAT-14102', 'Cálculo Diferencial e Integral III', 4, 'both', ['MAT-14101', 'MAT-14201']],
+  ['EST-11101', 'Probabilidad', 4, 'both', ['MAT-14101']],
+  ['ECO-11101', 'Economía I', 4, 'both', []],
+  ['EGN-17161', 'Historia Socio-Política de México', 4, 'both', ['EGN-17123', 'LEN-12702']],
+  ['SDI-11322', 'Circuitos Lógicos', 5, 'fall', ['SDI-11120']],
+  ['COM-14106', 'Gráficas por Computadora', 5, 'fall', ['COM-11103']],
+  ['MAT-14300', 'Álgebra Superior I', 5, 'both', ['MAT-14001']],
+  ['EST-11102', 'Inferencia Estadística', 5, 'both', ['EST-11101', 'MAT-14102']],
+  ['ECO-12102', 'Economía II', 5, 'both', ['ECO-11101']],
+  ['EGN-17162', 'Probs. de la Realidad Mex. Contemp.', 5, 'both', ['EGN-17142', 'EGN-17161']],
+  ['SDI-11561', 'Principios de Mecatrónica', 6, 'spring', ['SDI-11322', 'COM-11102']],
+  ['COM-12102', 'Análisis y Diseño de Sist. de Info. (A)', 6, 'spring', ['COM-16203']],
+  ['COM-23101', 'Inteligencia Artificial', 6, 'spring', ['COM-16203']],
+  ['COM-14101', 'Fundamentos Matemáticos de la Comp.', 6, 'spring', ['SDI-11322']],
+  ['COM-14105', 'Algoritmos Numéricos por Computadora', 6, 'both', ['COM-16203', 'MAT-14102']],
+  ['MAT-14301', 'Álgebra Superior II', 6, 'both', ['MAT-14300']],
+  ['LEN-12724', 'Com. Escrita para Ing. en Comp. (A)', 6, 'both', ['LEN-12701']],
+  ['SDI-13760', 'Redes de Computadoras', 7, 'fall', ['MAT-14102']],
+  ['SDI-24810', 'Sistemas de Comercio Electrónico (A)', 7, 'both', ['COM-12101']],
+  ['COM-11107', 'Organización y Prog. de Computadoras', 7, 'fall', ['SDI-11322']],
+  ['COM-22104', 'Ingeniería de Software', 7, 'fall', ['COM-16203']],
+  ['LEN-12764', 'Com. Profesional para Ing. en Comp. (A)', 7, 'both', ['LEN-12724', 'LEN-12702']],
+  ['OPT-7', 'Optativa (7° sem)', 7, 'both', []],
+  ['SDI-13782', 'Diseño y Arquitectura de Redes', 8, 'spring', ['SDI-13760']],
+  ['COM-14104', 'Sistemas Operativos', 8, 'spring', ['SDI-11561']],
+  ['COM-22105', 'Sistemas Distribuidos', 8, 'spring', ['COM-12102']],
+  ['SDI-15816', 'Seminario de Titulación', 8, 'both', []],
+  ['OPT-8', 'Optativa (8° sem)', 8, 'both', []]
+];
+
+export const CRITICAL_CHAIN = new Set(['SDI-11120', 'SDI-11322', 'SDI-11561', 'COM-14104']);
+export const GATES = new Set(['COM-11102', 'COM-16203']);
+
+export const createSubjects = () => {
+  return SUBJECTS_DATA.map(([id, name, semester, offer, prereqs]) => ({
+    id,
+    name,
+    semester,
+    offer,
+    prereqs,
+    critical: CRITICAL_CHAIN.has(id),
+    gate: GATES.has(id)
+  }));
+};
